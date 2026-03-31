@@ -1,7 +1,7 @@
-import pytest
 from datetime import date, timedelta
+
 from src.api.schemas.request import TicketSchema
-from src.engine.rules.contract_type import check_contract_complaint, RULE_NAME
+from src.engine.rules.contract_type import RULE_NAME, check_contract_complaint
 
 
 def make_ticket(category: str) -> TicketSchema:

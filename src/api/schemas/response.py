@@ -1,8 +1,9 @@
-from enum import Enum
+from enum import StrEnum
+
 from pydantic import BaseModel
 
 
-class RiskLevel(str, Enum):
+class RiskLevel(StrEnum):
     LOW = "Low"
     MEDIUM = "Medium"
     HIGH = "High"

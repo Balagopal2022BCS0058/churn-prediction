@@ -1,7 +1,7 @@
-import pytest
 from datetime import date, timedelta
+
 from src.api.schemas.request import TicketSchema
-from src.engine.rules.ticket_frequency import check_ticket_frequency, RULE_NAME
+from src.engine.rules.ticket_frequency import RULE_NAME, check_ticket_frequency
 
 
 def make_ticket(days_ago: int, category: str = "general") -> TicketSchema:

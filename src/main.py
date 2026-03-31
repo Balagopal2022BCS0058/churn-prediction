@@ -1,12 +1,14 @@
-import structlog
 import logging
 from contextlib import asynccontextmanager
+
+import structlog
 from fastapi import FastAPI
 from prometheus_client import make_asgi_app
-from src.config import settings
-from src.api.routes import health, predict
+
 from src.api.middleware.logging import LoggingMiddleware
 from src.api.middleware.metrics import MetricsMiddleware
+from src.api.routes import health, predict
+from src.config import settings
 
 
 def configure_logging():

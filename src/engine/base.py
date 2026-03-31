@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from src.api.schemas.request import PredictRiskRequest
 from src.api.schemas.response import PredictRiskResponse
 

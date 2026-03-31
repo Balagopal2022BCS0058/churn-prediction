@@ -1,9 +1,9 @@
-import pytest
 from datetime import date, timedelta
+
+import pytest
 
 
 def make_payload(**kwargs):
-    today = date.today()
     defaults = {
         "customer_id": "C001",
         "contract": "One year",

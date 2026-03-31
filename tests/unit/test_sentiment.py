@@ -1,5 +1,4 @@
-import pytest
-from src.features.sentiment import score_sentiment, average_sentiment
+from src.features.sentiment import average_sentiment, score_sentiment
 
 
 def test_positive_text():

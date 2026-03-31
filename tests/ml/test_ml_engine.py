@@ -1,17 +1,18 @@
 """Tests for ML inference engine including fallback behavior."""
 import tempfile
-import pytest
 from datetime import date, timedelta
 from pathlib import Path
+from unittest.mock import patch
+
 import joblib
 import numpy as np
-from unittest.mock import patch
+import pytest
 from sklearn.base import BaseEstimator, ClassifierMixin
 
 from src.api.schemas.request import PredictRiskRequest, TicketSchema
 from src.api.schemas.response import RiskLevel
-from src.engine.ml_engine import MLEngine
 from src.config import settings
+from src.engine.ml_engine import MLEngine
 
 
 class FixedProbabilityClassifier(BaseEstimator, ClassifierMixin):
@@ -38,7 +39,9 @@ def make_request(**kwargs) -> PredictRiskRequest:
         "monthly_charges": 85.0,
         "previous_monthly_charges": 70.0,
         "tickets": [
-            TicketSchema(date=date.today() - timedelta(days=1), category="complaint", text="unhappy")
+            TicketSchema(
+                date=date.today() - timedelta(days=1), category="complaint", text="unhappy"
+            )
         ],
     }
     defaults.update(kwargs)

@@ -1,11 +1,12 @@
 """Smoke test: train on tiny synthetic dataset, verify artifacts created."""
 import json
 import tempfile
-from pathlib import Path
 from datetime import date, timedelta
+from pathlib import Path
+
 import pandas as pd
-import pytest
-from src.ml.train import train, build_feature_matrix
+
+from src.ml.train import build_feature_matrix, train
 
 
 def make_synthetic_data(n: int = 60):

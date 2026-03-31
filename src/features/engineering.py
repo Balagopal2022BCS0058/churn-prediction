@@ -3,8 +3,8 @@ Shared feature engineering module — used by BOTH training (batch) and inferenc
 This is the critical module that prevents training-serving skew.
 """
 from datetime import date, timedelta
-from src.features.sentiment import average_sentiment
 
+from src.features.sentiment import average_sentiment
 
 FEATURE_NAMES = [
     "ticket_freq_7d",
@@ -20,7 +20,9 @@ FEATURE_NAMES = [
 ]
 
 
-def compute_ticket_frequency(tickets: list[dict], windows: list[int] = None, reference_date: date = None) -> dict:
+def compute_ticket_frequency(
+    tickets: list[dict], windows: list[int] = None, reference_date: date = None
+) -> dict:
     """
     Compute ticket count within each time window.
     tickets: list of dicts with key 'date' (date object)

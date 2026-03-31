@@ -1,7 +1,7 @@
-import pytest
 from datetime import date, timedelta
+
 from src.api.schemas.request import TicketSchema
-from src.engine.rules.charge_increase import check_charge_increase, RULE_NAME
+from src.engine.rules.charge_increase import RULE_NAME, check_charge_increase
 
 
 def make_ticket(category: str = "billing") -> TicketSchema:

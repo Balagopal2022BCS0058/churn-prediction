@@ -1,8 +1,9 @@
-from enum import Enum
+from enum import StrEnum
+
 from pydantic_settings import BaseSettings
 
 
-class EngineType(str, Enum):
+class EngineType(StrEnum):
     RULE = "rule"
     ML = "ml"
 

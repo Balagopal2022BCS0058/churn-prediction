@@ -1,9 +1,10 @@
 """Tests for data loader: synthetic ticket generation and CSV loading."""
 import tempfile
 from pathlib import Path
-import pytest
+
 import pandas as pd
-from src.ml.data_loader import build_ticket_dataframe, _simulate_tickets
+
+from src.ml.data_loader import _simulate_tickets, build_ticket_dataframe
 
 
 def make_customers(n: int = 10) -> pd.DataFrame:

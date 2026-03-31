@@ -1,9 +1,10 @@
 import structlog
 from fastapi import APIRouter
+
 from src.api.schemas.request import PredictRiskRequest
 from src.api.schemas.response import PredictRiskResponse
-from src.config import settings, EngineType
-from src.monitoring.metrics import RISK_PREDICTIONS, CHURN_PROBABILITY
+from src.config import EngineType, settings
+from src.monitoring.metrics import CHURN_PROBABILITY, RISK_PREDICTIONS
 
 logger = structlog.get_logger()
 router = APIRouter()

@@ -1,5 +1,7 @@
-import pytest
 from datetime import date, timedelta
+
+import pytest
+
 from src.api.schemas.request import PredictRiskRequest, TicketSchema
 from src.api.schemas.response import RiskLevel
 from src.engine.rule_engine import RuleBasedEngine
@@ -54,7 +56,9 @@ async def test_medium_risk_charge_increase():
     tickets = [TicketSchema(date=date.today() - timedelta(days=i), category="billing", text="")
                for i in range(1, 4)]
     engine = RuleBasedEngine()
-    resp = await engine.evaluate(make_request(monthly_charges=90.0, previous_monthly_charges=70.0, tickets=tickets))
+    resp = await engine.evaluate(
+        make_request(monthly_charges=90.0, previous_monthly_charges=70.0, tickets=tickets)
+    )
     assert resp.risk_level == RiskLevel.MEDIUM
     assert "RULE_CHARGE_INCREASE_MEDIUM" in resp.triggered_rules
 

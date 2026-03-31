@@ -1,12 +1,14 @@
 import json
-import structlog
 from pathlib import Path
+
 import joblib
+import structlog
+
 from src.api.schemas.request import PredictRiskRequest
 from src.api.schemas.response import PredictRiskResponse, RiskLevel
 from src.config import settings
 from src.engine.base import RiskEngine
-from src.features.engineering import extract_features, FEATURE_NAMES
+from src.features.engineering import FEATURE_NAMES, extract_features
 
 logger = structlog.get_logger()
 

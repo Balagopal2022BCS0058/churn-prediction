@@ -2,9 +2,9 @@
 Data loader: load Telco CSV and simulate/load ticket logs, merge on customer_id.
 """
 import random
-import string
 from datetime import date, timedelta
 from pathlib import Path
+
 import pandas as pd
 
 TICKET_CATEGORIES = ["complaint", "billing", "technical", "general"]

@@ -1,9 +1,13 @@
 import json
 from pathlib import Path
+
 import numpy as np
 from sklearn.metrics import (
-    f1_score, roc_auc_score, precision_recall_curve,
-    classification_report, confusion_matrix,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    precision_recall_curve,
+    roc_auc_score,
 )
 
 
@@ -30,7 +34,7 @@ def evaluate_model(model, X_test, y_test, output_dir: Path) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
-    print(f"\n=== Model Evaluation ===")
+    print("\n=== Model Evaluation ===")
     print(f"F1 (macro):  {metrics['f1_macro']}")
     print(f"ROC-AUC:     {metrics['roc_auc']}")
     print(f"PR-AUC:      {metrics['pr_auc']}")

@@ -7,6 +7,7 @@ Usage:
 import argparse
 import json
 from pathlib import Path
+
 import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -16,9 +17,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 
+from src.features.engineering import FEATURE_NAMES, extract_features
 from src.ml.data_loader import load_data
 from src.ml.evaluate import evaluate_model
-from src.features.engineering import extract_features, FEATURE_NAMES
 
 
 def build_feature_matrix(customers: pd.DataFrame, tickets: pd.DataFrame) -> pd.DataFrame:
@@ -27,7 +28,9 @@ def build_feature_matrix(customers: pd.DataFrame, tickets: pd.DataFrame) -> pd.D
     ticket_groups = tickets.groupby("customer_id")
     for _, row in customers.iterrows():
         cid = row["customer_id"]
-        cust_tickets = ticket_groups.get_group(cid).to_dict("records") if cid in ticket_groups.groups else []
+        cust_tickets = (
+            ticket_groups.get_group(cid).to_dict("records") if cid in ticket_groups.groups else []
+        )
         feats = extract_features(
             tickets=cust_tickets,
             monthly_charges=float(row["monthly_charges"]),
@@ -89,7 +92,9 @@ def train(telco_path: str, output_dir: str):
     # Save best model
     joblib.dump(best_model, out / "model.pkl")
     (out / "features.json").write_text(json.dumps(FEATURE_NAMES, indent=2))
-    (out / "model_info.json").write_text(json.dumps({"model_name": best_name, "f1_macro": best_f1}, indent=2))
+    (out / "model_info.json").write_text(
+        json.dumps({"model_name": best_name, "f1_macro": best_f1}, indent=2)
+    )
 
     print(f"Model saved to {out}/model.pkl")
     return best_model

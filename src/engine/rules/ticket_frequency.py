@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+
 from src.api.schemas.request import TicketSchema
 
 RULE_NAME = "RULE_TICKET_FREQUENCY_HIGH"

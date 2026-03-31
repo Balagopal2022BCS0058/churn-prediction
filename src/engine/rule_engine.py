@@ -1,9 +1,9 @@
 from src.api.schemas.request import PredictRiskRequest
 from src.api.schemas.response import PredictRiskResponse, RiskLevel
 from src.engine.base import RiskEngine
-from src.engine.rules.ticket_frequency import check_ticket_frequency
 from src.engine.rules.charge_increase import check_charge_increase
 from src.engine.rules.contract_type import check_contract_complaint
+from src.engine.rules.ticket_frequency import check_ticket_frequency
 
 
 class RuleBasedEngine(RiskEngine):
