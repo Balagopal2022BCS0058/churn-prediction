@@ -1,0 +1,60 @@
+{
+  "title": "Churn Prediction API",
+  "uid": "churn-api",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Request Rate (QPS)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [{
+        "expr": "rate(http_requests_total[1m])",
+        "legendFormat": "{{method}} {{endpoint}} {{status_code}}"
+      }]
+    },
+    {
+      "id": 2,
+      "title": "Request Latency (p50/p95/p99)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))", "legendFormat": "p50"},
+        {"expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))", "legendFormat": "p95"},
+        {"expr": "histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))", "legendFormat": "p99"}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Error Rate (4xx/5xx)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [{
+        "expr": "rate(http_requests_total{status_code=~'4..|5..'}[1m])",
+        "legendFormat": "{{status_code}}"
+      }]
+    },
+    {
+      "id": 4,
+      "title": "Churn Risk Distribution",
+      "type": "piechart",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [{
+        "expr": "sum by (risk_level) (churn_risk_predictions_total)",
+        "legendFormat": "{{risk_level}}"
+      }]
+    },
+    {
+      "id": 5,
+      "title": "Churn Probability Distribution (ML)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16},
+      "targets": [{
+        "expr": "histogram_quantile(0.5, rate(churn_probability_bucket[5m]))",
+        "legendFormat": "Median churn probability"
+      }]
+    }
+  ]
+}
